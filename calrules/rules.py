@@ -1,25 +1,26 @@
 from __future__ import annotations
+from enum import Enum
 
 import re
 import rule_engine
 
+class Response(Enum):
+  ACCEPT = 1
+  MAYBE = 2
+  DECLINE = 3
+  DELETE = 4
+
 class Rule:
-  def __init__(self, pattern: str, description: str, decline: bool = True, *decline_message: str):
+  def __init__(self, pattern: str, description: str, response: Response = Response.DECLINE, *message: str):
     self.pattern = pattern
     self.description = description
-    self.decline = decline
-    self.decline_message = decline_message
+    self.response = response
+    self.message = message
 
     self.rule = rule_engine.Rule(
       pattern, 
       rule_engine.Context(default_value=None, regex_flags=re.IGNORECASE | re.MULTILINE)
     )
-
-  def __getattribute__(self, name: str) -> Any:
-      return super().__getattribute__(name)
-
-  def __setattr__(self, name: str, value: Any) -> None:
-      return super().__setattr__(name, value)
 
   def matches(self, thing: dict) -> bool:
     return self.rule.matches(thing)
