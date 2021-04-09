@@ -1,4 +1,3 @@
-from __future__ import annotations
 from enum import Enum
 
 import re
@@ -27,7 +26,7 @@ class Rule:
 
 class Rules:
   @classmethod
-  def load(rules: list[Rule]) -> Rules:
+  def load(rules: list[Rule]) -> None:
     return Rules(rules)
 
   def __init__(self, rules: list[Rule]):
@@ -39,6 +38,9 @@ class Rules:
   def __next__(self):
     return next(self.rules)
 
+  def __len__(self):
+    return len(self.rules)
+
   def load(self, rules: list[Rule]):
     _rules = []
 
@@ -48,11 +50,11 @@ class Rules:
         description=r['description']
       )
 
-      if 'decline' in r:
-        rule.decline = r['decline']
+      if 'response' in r:
+        rule.decline = r['response']
       
-      if 'decline_message' in r:
-        rule.decline = r['decline_message']
+      if 'message' in r:
+        rule.decline = r['message']
 
       _rules.append(rule)
 

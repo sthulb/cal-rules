@@ -1,0 +1,14 @@
+rule:
+  pattern: str()
+  description: str()
+  response: enum('ACCEPT', 'MAYBE', 'DECLINE', 'DELETE')
+  message: str()
+---
+exchange:
+  domain: str()
+  username: str()
+  password: str()
+  email_address: str()
+  server: str()
+
+rules: list(rule)

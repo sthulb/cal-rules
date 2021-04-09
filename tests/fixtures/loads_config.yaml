@@ -1,0 +1,15 @@
+exchange:
+  server: exchange.example.com
+  username: test
+  password: pass
+  domain: DOMAIN
+  email: test@example.com
+
+rules:
+  - pattern: from == 'test@example.org'
+    description: rule
+    response: ACCEPT
+    message: oh hai
+
+  - pattern: from == 'test@example.org'
+    description: other rule
