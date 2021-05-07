@@ -2,7 +2,6 @@ import pytest
 
 from calrules.rules import Rule, Rules, Response
 
-
 def test_rule():
     rule = Rule('from == "email@example.com"', 'from email@example.com')
 
