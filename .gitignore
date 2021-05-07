@@ -4,3 +4,6 @@
 .vscode/*
 
 *.egg-info
+.coverage
+.pytest_cache/*
+.venv/*
