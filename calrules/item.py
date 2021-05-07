@@ -7,10 +7,11 @@ class Item:
     has_conflicts: bool
     sent_date   : int
 
-    def __init__(self, item: BaseMeetingItem=None):
-        self.hydrate(item)
+    def __init__(self, item: BaseMeetingItem = None):
+        if item is not None:
+            self.hydrate(item)
 
-    def hydrate(self, item: BaseMeetingItem=None):
+    def hydrate(self, item: BaseMeetingItem):
         if item is None:
             raise ItemError('No item passed in')
 
