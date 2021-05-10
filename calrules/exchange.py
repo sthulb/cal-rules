@@ -1,5 +1,7 @@
 # from calrules.config import Config
 
+from .item import Item, ItemError
+
 import logging
 
 from exchangelib.account import Account, DELEGATE
@@ -26,6 +28,7 @@ class Exchange:
                 continue
 
             logger.info(f'Got item: {item.subject}')
-            hydrated_item = ""
 
-            items.append(hydrated_item)
+            items.append(Item(item))
+
+        return items
