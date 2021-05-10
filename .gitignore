@@ -8,3 +8,5 @@
 .coverage.*
 .pytest_cache/*
 .venv/*
+
+config.yaml
