@@ -1,6 +1,6 @@
 # from calrules.config import Config
 
-from .item import Item, ItemError
+from calrules.item import Item, ItemError
 
 import logging
 
