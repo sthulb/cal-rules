@@ -7,7 +7,8 @@ exchange:
   password: str()
   server: str()
   email: str()
-  
+  ca_cert: str(required=False)
+
 rules: list(include('rule'))
 
 ---
