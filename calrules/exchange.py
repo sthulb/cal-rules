@@ -30,11 +30,10 @@ class Exchange:
 
             if "ca_cert" in exchange and Path(exchange["ca_cert"]).is_file():
                 logger.info(f"CA Path: {exchange['ca_cert']}")
-                BaseProtocol.HTTP_ADAPTER_CLS = ExchangeRootCA("foo").Root
+                ExchangeRootCA.ca_cert = exchange["ca_cert"]
+                BaseProtocol.HTTP_ADAPTER_CLS = ExchangeRootCA
 
-            self.account = Account(exchange['email'], autodiscover=False, config=config)
-
-            pprint(self.account.inbox)
+            self.account = Account(exchange['email'], autodiscover=False, config=config, access_type=DELEGATE)
         except Exception as e:
             print(e)
 
