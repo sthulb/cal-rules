@@ -39,7 +39,7 @@ def main():
                 LOG.error(f"There was a problem running this rule: {r.description}")
                 continue
 
-            LOG.info(f"Checking {i.subject} against {r.pattern}: {match}")
+            LOG.debug(f"Checking {i.subject} against {r.pattern}: {match}")
             LOG.debug("Item attributes: %s", i.to_dict())
 
             if match and i.action is not None:
