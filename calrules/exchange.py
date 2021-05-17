@@ -1,6 +1,6 @@
 import logging
 
-from calrules.item import Item, ItemError
+from calrules.item import Item
 from calrules.exchange_rootca import ExchangeRootCA
 
 from pathlib import Path
