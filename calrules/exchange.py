@@ -1,6 +1,5 @@
 import logging
 
-from calrules.logger import logger
 from calrules.item import Item, ItemError
 from calrules.exchange_rootca import ExchangeRootCA
 
