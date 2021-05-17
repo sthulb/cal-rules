@@ -12,8 +12,6 @@ from exchangelib.credentials import Credentials
 from exchangelib.items import MeetingCancellation, MeetingRequest
 from exchangelib.protocol import BaseProtocol
 
-from pprint import pprint
-
 LOG = logging.getLogger(__name__)
 
 class Exchange:
