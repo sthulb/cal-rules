@@ -9,12 +9,20 @@ license = "MIT"
 python = "^3.9"
 rule-engine = "^3.2.0"
 PyYAML = "^5.4.1"
-exchangelib = "^4.2.0"
 yamale = "^3.0.6"
+exchangelib = "3.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
 pytest-cov = "^2.11.1"
+flake8 = "^3.9.2"
+flake8-variables-names = "^0.0.4"
+flake8-isort = "^4.0.0"
+flake8-fixme = "^1.1.1"
+flake8-builtins = "^1.5.3"
+flake8-comprehensions = "^3.5.0"
+flake8-black = "^0.2.1"
+black = "^21.5b1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
