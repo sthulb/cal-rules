@@ -1,9 +1,8 @@
-# from calrules.config import Config
+import logging
 
+from calrules.logger import logger
 from calrules.item import Item, ItemError
 from calrules.exchange_rootca import ExchangeRootCA
-
-import logging
 
 from pathlib import Path
 
@@ -12,24 +11,19 @@ from exchangelib.configuration import Configuration
 from exchangelib.credentials import Credentials
 from exchangelib.items import MeetingCancellation, MeetingRequest
 from exchangelib.protocol import BaseProtocol
-from exchangelib.errors import TransportError
-from exchangelib.version import Version, Build
 
 from pprint import pprint
 
-LOGGER_NAME = "exchange"
-
-logger = logging.getLogger(LOGGER_NAME)
-logger.setLevel(logging.DEBUG)
+LOG = logging.getLogger(__name__)
 
 class Exchange:
     def __init__(self, exchange: dict) -> None:
         try:
             creds = Credentials(f'{exchange["domain"]}\{exchange["username"]}', exchange["password"])
-            config = Configuration(server=exchange["server"], credentials=creds, version=Version(build=Build(14, 3, 513)))
+            config = Configuration(server=exchange["server"], credentials=creds)
 
             if "ca_cert" in exchange and Path(exchange["ca_cert"]).is_file():
-                logger.info(f"CA Path: {exchange['ca_cert']}")
+                LOG.info(f"CA Path: {exchange['ca_cert']}")
                 ExchangeRootCA.ca_cert = exchange["ca_cert"]
                 BaseProtocol.HTTP_ADAPTER_CLS = ExchangeRootCA
 
@@ -39,12 +33,13 @@ class Exchange:
 
     def items(self):
         items = []
-        for item in self.account.root.all():
-            if not isinstance(item, MeetingCancellation) or not isinstance(item, MeetingRequest):
+        for item in self.account.inbox.all():
+            if not isinstance(item, MeetingRequest) and not isinstance(item, MeetingCancellation):
                 continue
 
-            logger.info(f"Got item: {item.subject}")
+            hydrated_item = Item(item)
 
-            items.append(Item(item))
+            LOG.debug(f"item: {hydrated_item.to_dict}")
+            items.append(hydrated_item)
 
         return items
