@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "calrules"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Simon Thulbourn"]
 license = "MIT"
@@ -29,7 +29,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-calrules = "calrules.cli:main"
+calrules = "calrules.__main__:main"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
