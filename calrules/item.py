@@ -47,7 +47,14 @@ class Item:
 
         self.subject = item.subject
         self.sender = item.sender.email_address
-        to_recipients = item.to_recipients if item.cc_recipients is None else item.to_recipients + item.cc_recipients
+        if item.to_recipients is None and item.cc_recipients is None:
+            to_recipients = []
+        elif item.cc_recipients is None:
+            to_recipients = item.to_recipients
+        elif item.to_recipients is None:
+            to_recipients = item.cc_recipients
+        else:
+            to_recipients = item.to_recipients + item.cc_recipients
         self.recipients = [to.email_address for to in to_recipients]
 
         if isinstance(item, MeetingRequest) and item.conflicting_meeting_count > 0:
