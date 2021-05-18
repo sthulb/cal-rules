@@ -79,6 +79,11 @@ class Item:
 
     def delete(self):
         try:
+            self.item.account.inbox.get(
+                id=self.item.associated_calendar_item_id.id,
+                changekey=self.item.associated_calendar_item_id.changekey
+            ).delete()
+
             self.item.delete(affected_task_occurrences='AllOccurrences')
         except Exception as e:
             raise ItemError(e)
