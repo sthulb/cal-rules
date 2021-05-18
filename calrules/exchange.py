@@ -30,7 +30,7 @@ class Exchange:
 
     def items(self):
         items = []
-        for item in self.account.inbox.all():
+        for item in self.account.inbox.all().order_by("-datetime_received"):
             if not isinstance(item, MeetingRequest) and not isinstance(item, MeetingCancellation):
                 continue
 
