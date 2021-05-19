@@ -1,6 +1,7 @@
 from enum import Enum
 from calrules.rules import Response
 from exchangelib.items.calendar_item import BaseMeetingItem, MeetingCancellation, MeetingRequest
+from exchangelib.properties import MessageHeader
 
 class ItemType(Enum):
     REQUEST = 1
@@ -10,6 +11,9 @@ class ItemError(Exception):
     pass
 
 class ItemActionError(Exception):
+    pass
+
+class ItemThreadIndexError(Exception):
     pass
 
 class Item:
@@ -112,3 +116,8 @@ class Item:
             self.item.tentatively_accept()
         except Exception as e:
             raise ItemActionError(e)
+
+    def thread_index(self) -> str:
+        for h in self.item.headers:
+                if h.name == "Thread-Index":
+                    return h.value

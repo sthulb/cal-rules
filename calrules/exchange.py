@@ -30,11 +30,19 @@ class Exchange:
 
     def items(self):
         items = []
+        seen_threads = []
         for item in self.account.inbox.all().order_by("-datetime_received"):
             if not isinstance(item, MeetingRequest) and not isinstance(item, MeetingCancellation):
                 continue
 
             hydrated_item = Item(item)
+
+            # check to see if we've seen this thread before, skip it if we have
+            thread_index = hydrated_item.thread_index()
+            if thread_index in seen_threads:
+                continue
+            else:
+                seen_threads.append(thread_index)
 
             LOG.debug(f"item: {hydrated_item.to_dict}")
             items.append(hydrated_item)
