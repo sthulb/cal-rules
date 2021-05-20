@@ -8,6 +8,7 @@ exchange:
   server: str()
   email: str()
   ca_cert: str(required=False)
+  days_back: int(required=False)
 
 rules: list(include('rule'))
 

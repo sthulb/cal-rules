@@ -10,6 +10,8 @@ from exchangelib.configuration import Configuration
 from exchangelib.credentials import Credentials
 from exchangelib.items import MeetingCancellation, MeetingRequest
 from exchangelib.protocol import BaseProtocol
+from exchangelib import EWSDateTime, Q
+from datetime import timedelta
 
 LOG = logging.getLogger(__name__)
 
@@ -24,6 +26,9 @@ class Exchange:
                 ExchangeRootCA.ca_cert = exchange["ca_cert"]
                 BaseProtocol.HTTP_ADAPTER_CLS = ExchangeRootCA
 
+            if "days_back" in exchange:
+                self.days_back = exchange["days_back"]
+
             self.account = Account(exchange['email'], autodiscover=False, config=config, access_type=DELEGATE)
         except Exception as e:
             print(e)
@@ -31,7 +36,15 @@ class Exchange:
     def items(self):
         items = []
         seen_threads = []
-        for item in self.account.inbox.all().order_by("-datetime_received"):
+
+        try:
+            start = self.account.default_timezone.localize(EWSDateTime.today() - timedelta(days=self.days_back))
+            messageFilter = Q(datetime_received__gte=start)
+            LOG.info(f"Processing only items received after: {start}")
+        except AttributeError:
+            messageFilter = Q()
+
+        for item in self.account.inbox.all().order_by("-datetime_received").filter(messageFilter):
             if not isinstance(item, MeetingRequest) and not isinstance(item, MeetingCancellation):
                 continue
 
