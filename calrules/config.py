@@ -6,6 +6,7 @@ exchange:
   username: str()
   password: str()
   server: str()
+  port: int(required=False)
   email: str()
   ca_cert: str(required=False)
   days_back: int(required=False)
