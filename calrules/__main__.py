@@ -44,6 +44,7 @@ def main():
 
             if match and i.action is not None:
                 i.mark(r.response, r.message)
+                break
 
     for i in items:
         if i.action is Response.NOOP:
