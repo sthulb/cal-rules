@@ -56,6 +56,8 @@ def main():
 
             if match and i.action is not None:
                 i.mark(r.response, r.message)
+                LOG.debug(f"Marking {i.subject} with response: {r.message}.  Further processing of this item ceased.")
+                break
 
     for i in items:
         if i.action is Response.NOOP:
