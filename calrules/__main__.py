@@ -27,8 +27,8 @@ args = args_parser.parse_args()
 
 def main():
     config_file = "config.yaml"
-    if "config" in args and args["config"] is not None:
-        config_file = args["config"]
+    if hasattr(args, "config") and args.config is not None:
+        config_file = args.config
 
     LOG.info(f"Using config file: {config_file}")
 
