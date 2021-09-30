@@ -23,7 +23,7 @@ class Exchange:
 
         try:
             creds = Credentials(f'{exchange["domain"]}\{exchange["username"]}', exchange["password"])
-            config = Configuration(server=exchange["server"], port=port, credentials=creds)
+            config = Configuration(server=exchange["server"], credentials=creds)
 
             if "ca_cert" in exchange and Path(exchange["ca_cert"]).is_file():
                 LOG.info(f"CA Path: {exchange['ca_cert']}")
