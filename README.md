@@ -34,6 +34,24 @@ rules:
     description: Decline cal spam
     response: DECLINE
     message: No thanks!
+    
+  ## Complex rules
+  - pattern: >
+      sender in [
+          "foo@example.com",
+          "bar@example.com",
+          "baz@example.com",
+        ]
+    description: Thing (Addresses)
+    response: DECLINE 
+  - pattern: >
+      [s for s in [
+          ".*Foo.*",
+          ".*Bar.*",
+          ".*Baz.*",
+        ] if subject =~ s]
+    description: Thing (Subject)
+    response: DECLINE
 ```
 
 ## Running
