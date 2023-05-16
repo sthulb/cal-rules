@@ -4,6 +4,22 @@
 
 `calrules` only works with Microsoft Exchange calendar providers.
 
+## Installation
+I'm too lazy to create a PyPi package, but you can easily install this using:
+```sh
+pip install git+https://github.com/sthulb/cal-rules.git
+```
+This package requires Python 3.9 or higher.
+
+## Running
+You can run the project using the `calrules` binary that's installed, make sure you include the `--config` parameter:
+```sh
+calrules --config /path/to/config.yaml
+```
+
+You can add more detailed logging using the `LOG_LEVEL=debug` env var.
+
+
 ## Rule attributes
 - `sender` email address who sent the meeting
 - `recipients` a list of email addresses the event was sent to.
@@ -53,5 +69,3 @@ rules:
     description: Thing (Subject)
     response: DECLINE
 ```
-
-## Running
