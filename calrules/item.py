@@ -98,13 +98,13 @@ class Item:
 
             self.item.delete(affected_task_occurrences='AllOccurrences')
         except Exception as e:
-            raise ItemError(e)
+            raise ItemActionError(e)
 
     def accept(self):
         try:
             self.item.accept()
         except Exception as e:
-            raise ItemError(e)
+            raise ItemActionError(e)
 
     def decline(self):
         try:
