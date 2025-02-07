@@ -60,10 +60,10 @@ def main():
                 break
 
     for i in items:
+        LOG.info(f"Item: {i.subject} is marked for {i.action}")
+
         if i.action is Response.NOOP:
             continue
-
-        LOG.info(f"Item: {i.subject} is marked for {i.action}")
 
         try:
             if i.action is Response.ACCEPT:
