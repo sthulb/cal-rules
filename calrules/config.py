@@ -18,7 +18,7 @@ rules: list(include('rule'))
 rule:
   pattern: str()
   description: str()
-  response: enum('ACCEPT', 'MAYBE', 'DECLINE', 'DELETE', required=False, none='DECLINE')
+  response: enum('ACCEPT', 'MAYBE', 'DECLINE', 'DELETE', 'NOOP', required=False, none='NOOP')
   message: str(required=False)
 """
 
