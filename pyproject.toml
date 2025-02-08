@@ -8,7 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 rule-engine = "^3.2.0"
-PyYAML = "^5.4.1"
+PyYAML = "^6.0.2"
 yamale = "^3.0.6"
 exchangelib = "3.3.2"
 
